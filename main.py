@@ -30,7 +30,7 @@ def delete_keywords(keywords,maxLimit):
 def delete_unread(maxLimit):
     t=1
     prev=0
-    while(t<=(maxLimit/25)):
+    while(t<=(maxLimit/25)+1):
         unread=ezgmail.unread()
         for i in range(len(unread)):
             print(f"Deleted the mails : {prev+i+1}.........")
