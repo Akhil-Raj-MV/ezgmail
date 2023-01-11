@@ -16,6 +16,8 @@ import ezgmail
 def delete_specific_keyword(keyword,maxLimit):
     thread=ezgmail.search(keyword,maxResults=maxLimit)
     print(f"There are {len(thread)} emails with the keyword {keyword}")
+    if(len(thread)==0):
+        return
     for i in range(len(thread)):
         thread[i].trash()
     print(f"Deleted {len(thread)} emails")
@@ -32,6 +34,8 @@ def delete_unread(maxLimit):
     prev=0
     while(t<=(maxLimit/25)+1):
         unread=ezgmail.unread()
+        if(len(unread)==0):
+            return
         for i in range(len(unread)):
             print(f"Deleted the mails : {prev+i+1}.........")
             unread[i].trash()
@@ -43,8 +47,11 @@ def delete_unread(maxLimit):
 def delete_by_sender(sender,maxLimit):
     thread=ezgmail.search(f"from:{sender}",maxResults=maxLimit)
     print(f"There are {len(thread)} emails from the sender {sender}")
+    if(len(thread)==0):
+        return
     for i in range(len(thread)):
         thread[i].trash()
+        print(f"Deleting the {i+1} mails....")
     print(f"Deleted {len(thread)} emails")
 
 
@@ -52,8 +59,12 @@ def delete_by_sender(sender,maxLimit):
 def delete_by_subject(sub,maxLimit):
     thread=ezgmail.search(f"subject:{sub}",maxResults=maxLimit)
     print(f"There are {len(thread)} emails of the subject {sub}")
+    if(len(thread)==0):
+        return
     for i in range(len(thread)):
         thread[i].trash()
+        print(f"Deleting the {i+1} mails....")
+
     print(f"Deleted {len(thread)} emails")
 
 
@@ -62,8 +73,12 @@ def delete_by_subject(sub,maxLimit):
 def delete_by_category(category,maxLimit):
     thread=ezgmail.search(f"category:{category}",maxResults=maxLimit)
     print(f"There are {len(thread)} emails of the category {category}")
+    if(len(thread)==0):
+        return
     for i in range(len(thread)):
         thread[i].trash()
     print(f"Deleted {len(thread)} emails")
 
-delete_unread(20)
+#delete_by_subject("Lost and Found",1000)
+#delete_by_sender("Sreedharan R ",1200)
+#delete_by_subject("lost",1000)
